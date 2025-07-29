@@ -9,7 +9,7 @@
 
 ## Table of Contents
 
-  * [About CineHub](https://www.google.com/search?q=%23about-cinehub)
+  * [About CineHub](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#about-cinehub)
   * [Features](https://www.google.com/search?q=%23features)
   * [Tech Stack](https://www.google.com/search?q=%23tech-stack)
   * [Getting Started](https://www.google.com/search?q=%23getting-started)
@@ -20,7 +20,6 @@
   * [Usage](https://www.google.com/search?q=%23usage)
   * [Future Enhancements](https://www.google.com/search?q=%23future-enhancements)
   * [Screenshots](https://www.google.com/search?q=%23screenshots)
-  * [License](https://www.google.com/search?q=%23license)
   * [Acknowledgements](https://www.google.com/search?q=%23acknowledgements)
 
 -----
