@@ -70,7 +70,7 @@ Before you begin, ensure you have the following installed:
 
     ```bash
     git clone [project-nexus](https://github.com/yusufweb/alx-project-nexus)
-    cd cinehub
+    cd alx-project-nexus
     ```
 
 2.  **Install dependencies:**
