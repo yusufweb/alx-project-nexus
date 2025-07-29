@@ -10,17 +10,17 @@
 ## Table of Contents
 
   * [About CineHub](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#about-cinehub)
-  * [Features](https://www.google.com/search?q=%23features)
-  * [Tech Stack](https://www.google.com/search?q=%23tech-stack)
-  * [Getting Started](https://www.google.com/search?q=%23getting-started)
-      * [Prerequisites](https://www.google.com/search?q=%23prerequisites)
-      * [Installation](https://www.google.com/search?q=%23installation)
-      * [Environment Variables](https://www.google.com/search?q=%23environment-variables)
-      * [Running Locally](https://www.google.com/search?q=%23running-locally)
-  * [Usage](https://www.google.com/search?q=%23usage)
-  * [Future Enhancements](https://www.google.com/search?q=%23future-enhancements)
-  * [Screenshots](https://www.google.com/search?q=%23screenshots)
-  * [Acknowledgements](https://www.google.com/search?q=%23acknowledgements)
+  * [Features](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#features)
+  * [Tech Stack](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#tech-stack)
+  * [Getting Started](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#getting-started)
+      * [Prerequisites](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#prerequisites)
+      * [Installation](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#installation)
+      * [Environment Variables](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#environment-variables)
+      * [Running Locally](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#running-locally)
+  * [Usage](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#usage)
+  * [Future Enhancements](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#usage)
+  * [Screenshots](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#usage)
+  * [Acknowledgements](https://github.com/yusufweb/alx-project-nexus/blob/main/README.md#usage)
 
 -----
 
