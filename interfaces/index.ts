@@ -1,4 +1,4 @@
-interface PopularMoviesResponse {
+export interface PopularMoviesResponse {
   page: number;
   results: {
     id: number;
