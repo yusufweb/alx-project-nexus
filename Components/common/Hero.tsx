@@ -8,17 +8,17 @@ const HeroSection: React.FC = () => {
     <section className="relative h-[100vh] sm:h-[100vh] md:h-[100vh] w-full overflow-hidden">
       {/* Background Image using next/image */}
       <Image
-        src="/Hero/hero-bg.png" // Path to your static image in the public folder
-        alt="Movie background"
-        layout="fill" // Makes the image fill the parent container
-        objectFit="cover" // Ensures the image covers the section, cropping if necessary
-        quality={80} // Adjust image quality for performance (0-100)
-        className="z-0" // Send it to the background
-        priority // Load this image eagerly as it's critical for the LCP
+        src="/Hero/hero-bg.png"
+        alt="Movie Hero background"
+        layout="fill"
+        objectFit="cover"
+        quality={80}
+        className="z-0"
+        priority
       />
 
       {/* Dark Overlay for Text Readability */}
-      <div className="absolute inset-0 bg-[#010616] opacity-65 z-10"></div>
+      <div className="absolute inset-0 bg-[#010616] opacity-55 z-10"></div>
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-start justify-center h-full text-left text-white px-8">

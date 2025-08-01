@@ -2,15 +2,52 @@ import { GetStaticProps } from "next";
 import { HomePageProps, Movie } from "@/interfaces";
 import Hero from "@/Components/common/Hero";
 import Header from "@/Components/Layout/Header";
+import MovieCard from "@/Components/common/MovieCard";
 
 const Home: React.FC<HomePageProps> = ({ movies, error }) => {
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white p-4">
+        <div className="text-center bg-gray-800 p-8 rounded-lg shadow-xl">
+          <h1 className="text-3xl font-bold text-red-500 mb-4">
+            Error Loading Movies
+          </h1>
+          <p className="text-gray-300 mb-2">
+            There was an issue fetching the movie data.
+          </p>
+          <p className="text-gray-400 text-sm">Details: {error}</p>
+          <p className="mt-4 text-gray-400">
+            Please ensure your internet connection is stable.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Header />
       <Hero />
-      {movies.map((movie) => (
-        <div key={movie.id}>{movie.title} &bull; {movie.release_date}</div>
-      ))}
+      <div className="max-h-screen px-8 py-4 -mt-20 relative z-10">
+        {movies.length === 0 && !error && (
+          <p className="text-center text-gray-400 text-lg">
+            No popular movies found at the moment. Please try again later.
+          </p>
+        )}
+        <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5">
+          {movies.map((movie) => (
+            <div key={movie.id}>
+              <MovieCard
+                title={movie.title}
+                release_date={movie.release_date}
+                vote_average={movie.vote_average}
+                id={movie.id}
+                poster_path={movie.poster_path}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

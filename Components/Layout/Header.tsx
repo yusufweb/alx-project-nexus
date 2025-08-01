@@ -6,7 +6,7 @@ const Header: React.FC = () => {
     <header className="w-full px-2 lg:px-8 md:px-8 sm:px-8 py-4 flex items-center fixed top-0 left-0 z-50">
       <div className="flex justify-between items-center w-full">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl hidden sm:block lg:block md:block">
+          <h1 className="text-2xl hidden sm:block lg:block md:block font-semibold">
             Cine
             <span className="bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
               Hub
