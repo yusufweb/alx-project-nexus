@@ -1,25 +1,45 @@
 import Link from "next/link";
 import Button from "../common/Button";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 const Header: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // prevent form default behaviour.
+    if (searchTerm.trim()) {
+      // Navigate to the /search page with the query parameter
+      router.push(`/search?query=${encodeURIComponent(searchTerm.trim())}`);
+      setSearchTerm(""); // Clear the search input after submission
+    }
+  };
   return (
     <header className="w-full px-2 lg:px-8 md:px-8 sm:px-8 py-4 flex items-center fixed top-0 left-0 z-50">
       <div className="flex justify-between items-center w-full">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl hidden sm:block lg:block md:block font-semibold">
-            Cine
-            <span className="bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
-              Hub
-            </span>
-          </h1>
+          <Link href="/">
+            <h1 className="text-2xl hidden sm:block lg:block md:block font-semibold">
+              Cine
+              <span className="bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
+                Hub
+              </span>
+            </h1>
+          </Link>
         </div>
         <div className="lg:w-[70%] md:w-[70%] sm:w-[70%] w-[100%]">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search for movies, TV shows..."
-                className="w-full p-4 pl-12 rounded-full bg-[#010a2b] bg-opacity-90 text-gray-900 focus:outline-none focus:ring-0 transition-all duration-300 placeholder-white text-lg"
+                className="w-full p-4 pl-12 rounded-full bg-[#010a2b] bg-opacity-90 text-gray-900 focus:outline-none focus:ring-0 focus:text-cyan-300 transition-all duration-300 placeholder-white text-lg"
+                value={searchTerm}
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                }}
               />
               {/* Simple Search Icon */}
               <svg

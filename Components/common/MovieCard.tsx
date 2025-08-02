@@ -20,7 +20,7 @@ const MovieCard: React.FC<Movie> = ({
             height={500}
             layout="responsive"
             objectFit="cover"
-            className="rounded-t-lg"
+            className="rounded-lg"
             priority
           />
         ) : (
@@ -35,9 +35,9 @@ const MovieCard: React.FC<Movie> = ({
         </div>
       </div>
 
-      <div className="pt-3 space-y-2">
-        <p className="font-semibold text-[14px]">{title}</p>
-        <div className="flex space-x-3 text-sm text-gray-200 font-medium">
+      <div className="pt-3 space-y-3">
+        <p className="font-semibold lg:text-[14px] md:text-[16px] text-[20px]">{title}</p>
+        <div className="flex space-x-3 text-[14px] text-gray-200 font-semibold lg:text-[12px] md:text-[14px]">
           <span>⭐ {vote_average.toFixed(1)}</span>
           <span>&bull;</span>
           <span>{release_date ? new Date(release_date).getFullYear() : 'N/A'}</span>

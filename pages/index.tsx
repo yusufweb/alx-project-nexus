@@ -1,7 +1,6 @@
 import { GetStaticProps } from "next";
 import { HomePageProps, Movie } from "@/interfaces";
 import Hero from "@/Components/common/Hero";
-import Header from "@/Components/Layout/Header";
 import MovieCard from "@/Components/common/MovieCard";
 
 const Home: React.FC<HomePageProps> = ({ movies, error }) => {
@@ -26,9 +25,8 @@ const Home: React.FC<HomePageProps> = ({ movies, error }) => {
 
   return (
     <div>
-      <Header />
       <Hero />
-      <div className="max-h-screen px-8 py-4 -mt-20 relative z-10">
+      <div className="max-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 -mt-20 relative z-10">
         {movies.length === 0 && !error && (
           <p className="text-center text-gray-400 text-lg">
             No popular movies found at the moment. Please try again later.

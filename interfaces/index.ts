@@ -27,3 +27,23 @@ export interface ButtonProps {
   className?: string,
   onClick?: () => void
 }
+
+export interface SearchMovieResult {
+  id: number;
+  title: string;
+  poster_path: string | null;
+  release_date: string;
+  vote_average: number;
+  overview: string;
+}
+
+export interface SearchApiResponse {
+  page: number;
+  results: SearchMovieResult[];
+}
+
+export interface SearchPageProps {
+  results: SearchMovieResult[];
+  query: string;
+  error?: string;
+}
