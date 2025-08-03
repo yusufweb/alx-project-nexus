@@ -8,7 +8,7 @@ const HeroSection: React.FC = () => {
     <section className="relative h-[100vh] sm:h-[100vh] md:h-[100vh] w-full overflow-hidden">
       {/* Background Image using next/image */}
       <Image
-        src="/Hero/hero-bg.png"
+        src="/Hero/hero-bg-1.png"
         alt="Movie Hero background"
         layout="fill"
         objectFit="cover"
