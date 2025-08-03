@@ -40,6 +40,7 @@ const HeroSection: React.FC = () => {
           </div> 
         </div>
       </div>
+       <div className="absolute inset-0 bg-gradient-to-t from-[#010616] to-transparent"></div>
     </section>
   );
 };

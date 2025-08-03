@@ -47,3 +47,33 @@ export interface SearchPageProps {
   query: string;
   error?: string;
 }
+
+// shape of the data for a single movie detail page
+export interface MovieDetail {
+  id: number;
+  title: string;
+  tagline: string;
+  overview: string;
+  backdrop_path: string | null;
+  poster_path: string | null;
+  release_date: string;
+  runtime: number | null;
+  vote_average: number;
+  genres: {
+    id: number;
+    name: string;
+  }[];
+  credits: {
+    cast: {
+      id: number;
+      name: string;
+      character: string;
+      profile_path: string | null;
+    }[];
+  };
+}
+
+export interface MovieDetailPageProps {
+  movie: MovieDetail | null;
+  error?: string;
+}

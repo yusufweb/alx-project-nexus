@@ -2,6 +2,7 @@ import Image from "next/image";
 import { SearchPageProps, SearchMovieResult } from "@/interfaces";
 import { GetServerSideProps } from "next";
 import MovieCard from "@/Components/common/MovieCard";
+import Link from "next/link";
 
 const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
   if (error) {
@@ -38,6 +39,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
         ) : (
           <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5">
             {results.map((movie) => (
+              <Link href={`/movies/${movie.id}`}>
               <div key={movie.id}>
                 <MovieCard
                   title={movie.title}
@@ -47,6 +49,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
                   poster_path={movie.poster_path}
                 />
               </div>
+              </Link>
             ))}
           </div>
         )}
