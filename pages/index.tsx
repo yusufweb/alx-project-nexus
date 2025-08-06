@@ -27,7 +27,7 @@ const Home: React.FC<HomePageProps> = ({ movies, error }) => {
   return (
     <div>
       <Hero />
-      <div className="max-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 -mt-19 relative z-10">
+      <div className="max-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 -mt-18 relative z-10">
         {movies.length === 0 && !error && (
           <p className="text-center text-gray-400 text-lg">
             No popular movies found at the moment. Please try again later.
@@ -35,17 +35,17 @@ const Home: React.FC<HomePageProps> = ({ movies, error }) => {
         )}
         <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5">
           {movies.map((movie) => (
-            <Link href={`/movies/${movie.id}`}>
-            <div key={movie.id}>
-              <MovieCard
-                title={movie.title}
-                release_date={movie.release_date}
-                vote_average={movie.vote_average}
-                id={movie.id}
-                poster_path={movie.poster_path}
-              />
-            </div>
-            </Link>
+            // <Link href={`/movies/${movie.id}`}>
+              <div key={movie.id}>
+                <MovieCard
+                  title={movie.title}
+                  release_date={movie.release_date}
+                  vote_average={movie.vote_average}
+                  id={movie.id}
+                  poster_path={movie.poster_path}
+                />
+              </div>
+            // </Link>
           ))}
         </div>
       </div>

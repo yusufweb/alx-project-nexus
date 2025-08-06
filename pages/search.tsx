@@ -5,6 +5,7 @@ import MovieCard from "@/Components/common/MovieCard";
 import Link from "next/link";
 
 const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
+  
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white p-6">
@@ -20,7 +21,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
   }
   return (
     <>
-      <div className="max-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 mt-20 relative z-10 ">
+      <div className="max-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 mt-20 relative z-10 mb-8">
         <h1 className="text-[18px] lg:text-2xl sm:text-2xl md:text-2xl font-bold mb-8 text-center text-gray-100 mt-6">
           Search Results for &quot;{query}&quot;
         </h1>
@@ -33,23 +34,22 @@ const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
               height={300}
             />
             <p className="text-3xl text-center mt-0">
-              No movies found for {query}
+              No movies found for {query} 
             </p>
+            <p><span>Go back to <Link href="/" className="bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">Home</Link></span></p>
           </div>
         ) : (
           <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5">
             {results.map((movie) => (
-              <Link href={`/movies/${movie.id}`}>
-              <div key={movie.id}>
-                <MovieCard
-                  title={movie.title}
-                  release_date={movie.release_date}
-                  vote_average={movie.vote_average}
-                  id={movie.id}
-                  poster_path={movie.poster_path}
-                />
-              </div>
-              </Link>
+                <div key={movie.id}>
+                  <MovieCard
+                    title={movie.title}
+                    release_date={movie.release_date}
+                    vote_average={movie.vote_average}
+                    id={movie.id}
+                    poster_path={movie.poster_path}
+                  />
+                </div>
             ))}
           </div>
         )}

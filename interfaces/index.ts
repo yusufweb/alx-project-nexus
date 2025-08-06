@@ -23,9 +23,9 @@ export interface HomePageProps {
 }
 
 export interface ButtonProps {
-  title: string,
+  title: string | any,
   className?: string,
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent) => void
 }
 
 export interface SearchMovieResult {

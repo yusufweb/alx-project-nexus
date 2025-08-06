@@ -45,16 +45,23 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
     <div className="text-white min-h-screen">
       {/* Hero Backdrop Section */}
       <section className="relative h-120 w-full overflow-hidden">
-        {backdropUrl && (
+        {backdropUrl ?  (
           <Image
             src={backdropUrl}
             alt={`${movie.title} backdrop`}
             layout="fill"
             objectFit="cover"
             priority
-            className="z-0 opacity-45"
+            className="z-0 opacity-70"
           />
-        )}
+        ): (<Image
+            src="/Backdrop-default.jpg"
+            alt={`${movie.title} backdrop`}
+            layout="fill"
+            objectFit="cover"
+            priority
+            className="z-0 opacity-70"
+          />)}
         <div className="absolute inset-0 bg-gradient-to-t from-[#010616] to-transparent"></div>
       </section>
 

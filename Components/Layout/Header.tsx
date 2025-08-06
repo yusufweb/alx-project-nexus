@@ -64,7 +64,7 @@ const Header: React.FC = () => {
           </form>
         </div>
         <div className="hidden lg:block md:block sm:block">
-          <Link href="/">
+          <Link href="/favourite">
             <p className="text-[16px] font-semibold">Favorite</p>
           </Link>
         </div>
