@@ -1,10 +1,21 @@
 import Link from "next/link";
 import Button from "../common/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 const Header: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [scrolled, setScrolled] = useState<boolean>(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100)
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+
+  },[])
 
   const router = useRouter();
 
@@ -17,7 +28,7 @@ const Header: React.FC = () => {
     }
   };
   return (
-    <header className="w-full px-2 lg:px-8 md:px-8 sm:px-8 py-4 flex items-center fixed top-0 left-0 z-50">
+    <header className={`w-full px-2 lg:px-8 md:px-8 sm:px-8 py-4 flex items-center fixed top-0 left-0 z-50 ${scrolled && "bg-[#010616]"}`}>
       <div className="flex justify-between items-center w-full">
         <div className="flex justify-between items-center">
           <Link href="/">
