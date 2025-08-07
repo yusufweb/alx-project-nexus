@@ -4,6 +4,8 @@ import Image from "next/image";
 import Button from "./Button";
 import { useRouter } from "next/router";
 import { useFavorites } from "@/hooks/useFavourites";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const MovieCard: React.FC<Movie> = ({
   id,
@@ -52,7 +54,7 @@ const MovieCard: React.FC<Movie> = ({
 
         {/* Hover button placed inside image container */}
         <div className="absolute bottom-3 right-3">
-          <Button
+          {/* <Button
             title={
               isCurrentlyFavorite ? (
                 <Image
@@ -68,6 +70,17 @@ const MovieCard: React.FC<Movie> = ({
                   height={30}
                   alt="liked"
                 />
+              )
+            }
+            onClick={handleSaveClick}
+            className="bg-transparent hover:bg-transparent"
+          /> */}
+           <Button
+            title={
+              isCurrentlyFavorite ? (
+                <FontAwesomeIcon icon={faHeart} className="text-red-500 text-2xl" fade/>
+              ) : (
+                 <FontAwesomeIcon icon={faHeart} className="text-white text-2xl" fade/>
               )
             }
             onClick={handleSaveClick}
