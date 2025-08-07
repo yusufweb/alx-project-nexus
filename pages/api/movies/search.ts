@@ -4,7 +4,7 @@ import { SearchApiResponse } from "@/interfaces";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<
-    SearchApiResponse | { message: string; details?: any }
+    SearchApiResponse | { message: string; details?: string }
   >
 ) {
   // Ensure only GET Method are allowed for this endpoint

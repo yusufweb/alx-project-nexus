@@ -3,7 +3,7 @@ import { NextApiResponse, NextApiRequest } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<MovieDetail | { message: string; details?: any }>
+  res: NextApiResponse<MovieDetail | { message: string; details?: string }>
 ) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method Not Allowed" });

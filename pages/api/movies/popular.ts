@@ -4,7 +4,7 @@ import { PopularMoviesResponse } from "@/interfaces";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<
-    PopularMoviesResponse | { message: string; details?: any }
+    PopularMoviesResponse | { message: string; details?: string }
   >
 ) {
   // Ensure only GET Method are allowed for this endpoint

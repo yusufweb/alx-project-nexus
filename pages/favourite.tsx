@@ -14,7 +14,7 @@ const Favorite: React.FC<Movie> = () => {
 
         {favorites.length === 0 ? (
           <div className="text-center text-gray-400 text-lg py-12">
-            <p>You haven't added any favorite movies yet.</p>
+            <p>You have not added any favorite movies yet.</p>
             <p className="mt-2">Start exploring and save your top picks!</p>
           </div>
         ) : (

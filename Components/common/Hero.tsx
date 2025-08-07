@@ -5,7 +5,7 @@ import Button from "./Button";
 import { useRouter } from "next/router";
 
 const HeroSection: React.FC = () => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <section className="relative h-[100vh] sm:h-[100vh] md:h-[100vh] w-full overflow-hidden">
       {/* Background Image using next/image */}
@@ -31,17 +31,21 @@ const HeroSection: React.FC = () => {
         </h1>
         <div>
           <p className="text-[18px] sm:text-[18px] md:text-[18px] max-w-3xl mb-8 text-gray-200 drop-shadow-md">
-            What Should We Watch Tonight? We’ve all asked it. Now there\'s a
-            better answer. Whether you\'re solo, with friends, or on date night,
-            we help you pick the right movie—every time.
+            What Should We Watch Tonight? We have all asked it. Now there is a
+            better answer. Whether you are solo, with friends, or on date night,
+            we help you pick the right movie every time.
           </p>
           <div className="flex items-center flex-col lg:flex-row md:flex-row lg:space-x-4 md:space-x-4 space-y-5 lg:space-y-0 md:space-y-0">
-            <Button title="Explore" className="w-full lg:w-auto md:w-auto"/>
-            <Button title="My Favorite" className="w-full lg:w-auto md:w-auto" onClick={()=> router.push("/favourite")}/>
-          </div> 
+            <Button title="Explore" className="w-full lg:w-auto md:w-auto" />
+            <Button
+              title="My Favorite"
+              className="w-full lg:w-auto md:w-auto"
+              onClick={() => router.push("/favourite")}
+            />
+          </div>
         </div>
       </div>
-       <div className="absolute inset-0 bg-gradient-to-t from-[#010616] to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#010616] to-transparent"></div>
     </section>
   );
 };

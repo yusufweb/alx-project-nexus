@@ -2,7 +2,6 @@ import { GetStaticProps } from "next";
 import { HomePageProps, Movie } from "@/interfaces";
 import Hero from "@/Components/common/Hero";
 import MovieCard from "@/Components/common/MovieCard";
-import Link from "next/link";
 
 const Home: React.FC<HomePageProps> = ({ movies, error }) => {
   if (error) {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Movie } from "@/interfaces";
 import Image from "next/image";
 import Button from "./Button";
@@ -16,7 +16,7 @@ const MovieCard: React.FC<Movie> = ({
 }: Movie) => {
   const router = useRouter();
 
-  const { toggleFavorite, isFavorite, isLoading } = useFavorites();
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   // Determine if the current movie is a favorite
   const isCurrentlyFavorite = isFavorite(id);
@@ -54,27 +54,6 @@ const MovieCard: React.FC<Movie> = ({
 
         {/* Hover button placed inside image container */}
         <div className="absolute bottom-3 right-3">
-          {/* <Button
-            title={
-              isCurrentlyFavorite ? (
-                <Image
-                  src="/heart-saved.png"
-                  width={30}
-                  height={30}
-                  alt="liked"
-                />
-              ) : (
-                <Image
-                  src="/heart-default.png"
-                  width={30}
-                  height={30}
-                  alt="liked"
-                />
-              )
-            }
-            onClick={handleSaveClick}
-            className="bg-transparent hover:bg-transparent"
-          /> */}
            <Button
             title={
               isCurrentlyFavorite ? (
