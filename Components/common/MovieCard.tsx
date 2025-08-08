@@ -33,7 +33,7 @@ const MovieCard: React.FC<Movie> = ({
 
   return (
     <div
-      className="rounded-lg shadow-lg bg-[#030f3d] p-2 relative cursor-pointer group overflow-hidden h-full"
+      className="rounded-lg shadow-lg bg-[#020c36] p-3 cursor-pointer group overflow-hidden h-full"
       onClick={handleCardClick}
     >
       <div className="relative">
@@ -57,9 +57,9 @@ const MovieCard: React.FC<Movie> = ({
            <Button
             title={
               isCurrentlyFavorite ? (
-                <FontAwesomeIcon icon={faHeart} className="text-red-500 text-2xl" fade/>
+                <FontAwesomeIcon icon={faHeart} className="text-red-500 text-2xl"/>
               ) : (
-                 <FontAwesomeIcon icon={faHeart} className="text-white text-2xl" fade/>
+                 <FontAwesomeIcon icon={faHeart} className="text-white text-2xl"/>
               )
             }
             onClick={handleSaveClick}
