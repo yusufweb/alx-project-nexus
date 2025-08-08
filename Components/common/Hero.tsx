@@ -23,14 +23,14 @@ const HeroSection: React.FC = () => {
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-start justify-center h-full text-left text-white px-8">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-8 drop-shadow-lg">
+        <h1 className="text-6xl sm:text-5xl md:text-6xl font-extrabold leading-tight mb-8 drop-shadow-lg">
           Cine
           <span className="bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">
             Hub
           </span>
         </h1>
         <div>
-          <p className="text-[14px] sm:text-[18px] md:text-[18px] max-w-3xl mb-8 text-gray-200 drop-shadow-md">
+          <p className="text-[16px] sm:text-[18px] md:text-[18px] max-w-3xl mb-8 text-gray-200 drop-shadow-md">
             What Should We Watch Tonight? We have all asked it. Now there is a
             better answer. Whether you are solo, with friends, or on date night,
             we help you pick the right movie every time.
