@@ -33,7 +33,7 @@ const MovieCard: React.FC<Movie> = ({
 
   return (
     <div
-      className="rounded-lg shadow-lg bg-[#010822] p-2 relative cursor-pointer group overflow-hidden h-full"
+      className="rounded-lg shadow-lg bg-[#030f3d] p-2 relative cursor-pointer group overflow-hidden h-full"
       onClick={handleCardClick}
     >
       <div className="relative">

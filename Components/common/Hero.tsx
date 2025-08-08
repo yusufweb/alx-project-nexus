@@ -30,7 +30,7 @@ const HeroSection: React.FC = () => {
           </span>
         </h1>
         <div>
-          <p className="text-[18px] sm:text-[18px] md:text-[18px] max-w-3xl mb-8 text-gray-200 drop-shadow-md">
+          <p className="text-[14px] sm:text-[18px] md:text-[18px] max-w-3xl mb-8 text-gray-200 drop-shadow-md">
             What Should We Watch Tonight? We have all asked it. Now there is a
             better answer. Whether you are solo, with friends, or on date night,
             we help you pick the right movie every time.
