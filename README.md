@@ -2,8 +2,7 @@
 
 # CineHub: Your Personalized Movie Dashboard
 
-\![CineHub Logo/Banner - Placeholder]
-*(Once your application is ready, consider adding a project logo or a captivating screenshot of your dashboard here.)*
+\!![Cinehub Dashboard](public/dashboard_3.png)
 
 -----
 
@@ -95,7 +94,7 @@ CineHub requires an API key from TMDB to fetch movie data.
     In the root of your project directory, create a file named `.env.local` and add your TMDB API key:
 
     ```
-    NEXT_PUBLIC_TMDB_API_KEY=YOUR_TMDB_API_KEY_HERE
+    TMDB_API_KEY=YOUR_TMDB_API_KEY_HERE
     ```
 
     Replace `YOUR_TMDB_API_KEY_HERE` with your actual TMDB API key.
@@ -137,14 +136,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the a
 *(This section will be updated with actual screenshots of the application once it's developed.)*
 
   * **Homepage/Dashboard:**
-    \![CineHub Homepage Mockup]
-    *(Placeholder for image)*
+    \![CineHub Homepage Mockup](public/dashboard_3.png)
   * **Movie Detail Page:**
-    \![CineHub Movie Detail Page Mockup]
-    *(Placeholder for image)*
+    \![CineHub Movie Detail Page Mockup](public/dashboard_2.png)
   * **Search Results:**
-    \![CineHub Search Results Mockup]
-    *(Placeholder for image)*
+    \![CineHub Search Results Mockup](public/dashboard_4.png)
 
 -----
 
