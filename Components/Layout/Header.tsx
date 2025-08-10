@@ -28,7 +28,7 @@ const Header: React.FC = () => {
     }
   };
   return (
-    <header className={`w-full px-2 lg:px-8 md:px-8 sm:px-8 py-4 flex items-center fixed top-0 left-0 z-50 ${scrolled && "bg-[#010616]"}`}>
+    <header className={`w-full px-2 lg:px-8 md:px-8 sm:px-8 py-4 flex items-center fixed top-0 left-0 z-100 ${scrolled && "bg-[#010616]"}`}>
       <div className="flex justify-between items-center w-full">
         <div className="flex justify-between items-center">
           <Link href="/">
