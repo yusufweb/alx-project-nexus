@@ -26,7 +26,7 @@ const Home: React.FC<HomePageProps> = ({ movies, error }) => {
   return (
     <>
       <Hero />
-      <div className="max-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 -mt-18">
+      <div className="min-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 -mt-18">
         {movies.length === 0 && !error && (
           <p className="text-center text-gray-400 text-lg">
             No popular movies found at the moment. Please try again later.

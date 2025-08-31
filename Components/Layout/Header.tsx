@@ -28,7 +28,7 @@ const Header: React.FC = () => {
     }
   };
   return (
-    <header className={`w-full px-2 lg:px-8 md:px-8 sm:px-8 py-4 flex items-center fixed top-0 left-0 z-100 ${scrolled && "bg-[#010616]"}`}>
+    <header className={`w-full px-2 lg:px-8 md:px-8 sm:px-8 py-4 flex items-center fixed top-0 left-0 z-100 ${scrolled && "bg-[#010924]"}`}>
       <div className="flex justify-between items-center w-full">
         <div className="flex justify-between items-center">
           <Link href="/">
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
               <input
                 type="text"
                 placeholder="Search for movies, TV shows..."
-                className="w-full p-4 pl-12 rounded-full bg-[#010a2b] bg-opacity-90 text-gray-900 focus:outline-none focus:ring-0 focus:text-cyan-300 transition-all duration-300 placeholder-white sm:text-lg lg:text-lg md:text-lg placeholder:text-[14px]"
+                className="w-full p-4 pl-12 rounded-full bg-[#020c36] bg-opacity-90 text-gray-900 focus:outline-none focus:ring-0 focus:text-cyan-300 transition-all duration-300 placeholder-white sm:text-lg lg:text-lg md:text-lg placeholder:text-[14px]"
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);

@@ -21,7 +21,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
   }
   return (
     <>
-      <div className="max-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 mt-20 relative z-10 mb-8">
+      <div className="min-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 mt-20 relative z-10 mb-8">
         <h1 className="text-[18px] lg:text-2xl sm:text-2xl md:text-2xl font-bold mb-8 text-center text-gray-100 mt-6">
           Search Results for &quot;{query}&quot;
         </h1>

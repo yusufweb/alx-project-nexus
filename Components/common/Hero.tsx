@@ -10,16 +10,16 @@ const HeroSection: React.FC = () => {
     <section className="relative h-[100vh] sm:h-[100vh] md:h-[100vh] w-full overflow-hidden">
       {/* Background Image using next/image */}
       <Image
-        src="/Hero/hero-bg-1.png"
+        src="/Hero/hero-bg-2.png"
         alt="Movie Hero background"
         fill
-        quality={80}
+        quality={100}
         className="z-0 object-cover"
         priority
       />
 
       {/* Dark Overlay for Text Readability */}
-      <div className="absolute inset-0 bg-[#010616] opacity-15 z-10"></div>
+      <div className="absolute inset-0 bg-[#010616] opacity-36 z-10"></div>
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-start justify-center h-full text-left text-white px-8">
