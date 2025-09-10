@@ -10,7 +10,7 @@ const HeroSection: React.FC = () => {
     <section className="relative h-[100vh] sm:h-[100vh] md:h-[100vh] w-full overflow-hidden">
       {/* Background Image using next/image */}
       <Image
-        src="/Hero/hero-bg-2.png"
+        src="/Hero/hero-bg-3.jpg"
         alt="Movie Hero background"
         fill
         quality={100}
@@ -19,7 +19,7 @@ const HeroSection: React.FC = () => {
       />
 
       {/* Dark Overlay for Text Readability */}
-      <div className="absolute inset-0 bg-[#020b29] opacity-36 z-10"></div>
+      {/* <div className="absolute inset-0 bg-[#00071d] opacity-15 z-10"></div> */}
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-start justify-center h-full text-left text-white px-8">
@@ -30,7 +30,7 @@ const HeroSection: React.FC = () => {
           </span>
         </h1>
         <div>
-          <p className="text-[16px] sm:text-[18px] md:text-[18px] max-w-3xl mb-8 text-gray-200 drop-shadow-md">
+          <p className="text-[14px] sm:text-[16px] md:text-[16px] max-w-2xl mb-8 text-gray-200 drop-shadow-md">
             What Should We Watch Tonight? We have all asked it. Now there is a
             better answer. Whether you are solo, with friends, or on date night,
             we help you pick the right movie every time.
@@ -45,7 +45,7 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-[#010616] to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-[#00071d] to-transparent"></div>
     </section>
   );
 };

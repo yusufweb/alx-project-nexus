@@ -23,9 +23,10 @@ export interface HomePageProps {
 }
 
 export interface ButtonProps {
-  title: string | any,
+  title?: string | any,
   className?: string,
   onClick?: (e: React.MouseEvent) => void
+  children?: React.ReactNode;
 }
 
 export interface SearchMovieResult {

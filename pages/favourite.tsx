@@ -8,7 +8,7 @@ const Favorite: React.FC<Movie> = () => {
   return (
     <div className="min-h-screen text-white p-6 mt-20 pb-8">
       <div className="container mx-auto">
-        <h1 className="text-2xl font-bold mb-8 text-center text-gray-100 mt-6">
+        <h1 className="text-2xl font-bold mb-8 text-gray-200 mt-6">
           My Favorite Movies
         </h1>
 

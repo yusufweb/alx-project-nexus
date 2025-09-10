@@ -69,7 +69,7 @@ const MovieCard: React.FC<Movie> = ({
       </div>
 
       <div className="pt-3 space-y-3 p-2">
-        <p className="font-semibold lg:text-[14px] md:text-[16px] text-[14px] text-gray-300">
+        <p className="font-semibold lg:text-[14px] md:text-[16px] text-[11.5px] text-gray-300">
           {title}
         </p>
         <div className="flex space-x-3 text-[14px] text-gray-300 font-semibold lg:text-[12px] md:text-[14px]">
