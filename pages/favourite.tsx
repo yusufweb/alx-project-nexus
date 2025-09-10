@@ -18,7 +18,7 @@ const Favorite: React.FC<Movie> = () => {
             <p className="mt-2">Start exploring and save your top picks!</p>
           </div>
         ) : (
-          <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5">
+          <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-5">
             {favorites.map((movie: Movie) => (
               <MovieCard
                 title={movie.title}

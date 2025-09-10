@@ -33,7 +33,7 @@ const MovieCard: React.FC<Movie> = ({
 
   return (
     <div
-      className="rounded-lg relative shadow-lg bg-[#020c36] p-3 cursor-pointer group overflow-hidden h-full z-10"
+      className="rounded-lg relative shadow-lg p-0 cursor-pointer group overflow-hidden h-full z-10"
       onClick={handleCardClick}
     >
       <div className="relative">
@@ -68,11 +68,11 @@ const MovieCard: React.FC<Movie> = ({
         </div>
       </div>
 
-      <div className="pt-3 space-y-3">
-        <p className="font-semibold lg:text-[14px] md:text-[16px] text-[20px]">
+      <div className="pt-3 space-y-3 p-2">
+        <p className="font-semibold lg:text-[14px] md:text-[16px] text-[14px] text-gray-300">
           {title}
         </p>
-        <div className="flex space-x-3 text-[14px] text-gray-200 font-semibold lg:text-[12px] md:text-[14px]">
+        <div className="flex space-x-3 text-[14px] text-gray-300 font-semibold lg:text-[12px] md:text-[14px]">
           <span>⭐ {vote_average.toFixed(1)}</span>
           <span>&bull;</span>
           <span>

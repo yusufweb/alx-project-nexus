@@ -19,7 +19,7 @@ const HeroSection: React.FC = () => {
       />
 
       {/* Dark Overlay for Text Readability */}
-      <div className="absolute inset-0 bg-[#010616] opacity-36 z-10"></div>
+      <div className="absolute inset-0 bg-[#020b29] opacity-36 z-10"></div>
 
       {/* Content */}
       <div className="relative z-20 flex flex-col items-start justify-center h-full text-left text-white px-8">

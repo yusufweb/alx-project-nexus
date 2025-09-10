@@ -32,7 +32,10 @@ const Home: React.FC<HomePageProps> = ({ movies, error }) => {
             No popular movies found at the moment. Please try again later.
           </p>
         )}
-        <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5">
+        <div className="w-full relative z-10 mb-8 ">
+          <h1 className="text-2xl lg:text-3xl md:text-3xl font-bold mb-4 text-gray-200">Browse Popular Movies</h1>
+        </div>
+        <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-5">
           {movies.map((movie) => (
             <div key={movie.id}>
               <MovieCard
