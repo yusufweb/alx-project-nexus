@@ -146,12 +146,12 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
                       <Image
                         src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
                         alt={actor.name}
-                        width={128}
-                        height={128}
-                        className="rounded-lg object-cover mx-auto mb-2 transition-colors"
+                        width={500}
+                        height={500}
+                        className="rounded-lg object-cover mb-2 transition-colors"
                       />
                     ) : (
-                      <div className="rounded-lg bg-gray-700 flex items-center justify-center text-gray-400 mx-auto mb-2 text-xs">
+                      <div className="h-[82%] rounded-lg bg-gray-700 flex items-center justify-center text-gray-400 text-xs">
                         No Photo
                       </div>
                     )}
