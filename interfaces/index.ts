@@ -78,3 +78,13 @@ export interface MovieDetailPageProps {
   movie: MovieDetail | null;
   error?: string;
 }
+
+export interface GenreProps {
+  id: number;
+  name: string;
+} 
+
+export interface GenresPageProps {
+  genres: GenreProps[];
+  error?: string;
+}

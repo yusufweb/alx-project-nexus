@@ -45,7 +45,7 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
     <div className="text-white min-h-screen">
       {/* Hero Backdrop Section */}
       <section className="relative h-120 w-full overflow-hidden">
-        {backdropUrl ?  (
+        {backdropUrl ? (
           <Image
             src={backdropUrl}
             alt={`${movie.title} backdrop`}
@@ -54,15 +54,17 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
             priority
             className="z-0 opacity-70"
           />
-        ): (<Image
+        ) : (
+          <Image
             src="/Backdrop-default.jpg"
             alt={`${movie.title} backdrop`}
             layout="fill"
             objectFit="cover"
             priority
             className="z-0 opacity-70"
-          />)}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#010616] to-transparent"></div>
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#00071d] to-transparent"></div>
       </section>
 
       {/* Main Movie Content */}
@@ -130,25 +132,26 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
         {/* Cast Section */}
         {movie.credits && movie.credits.cast.length > 0 && (
           <div className="mt-12">
-            <h2 className="text-3xl font-bold mb-6 text-center text-gray-100">
+            <h2 className="text-2xl font-bold mb-6 text-gray-300">
               Top Cast
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-              {movie.credits.cast.slice(0, 12).map(
-                (
-                  actor // Show top 12 cast members
-                ) => (
-                  <div key={actor.id} className="text-center">
+            <div className="overflow-x-auto pb-4 scrollbar-hide">
+              <div className="flex space-x-8 min-w-max">
+                {movie.credits.cast.slice(0, 12).map((actor) => (
+                  <div
+                    key={actor.id}
+                    className="text-center w-35 flex-shrink-0"
+                  >
                     {actor.profile_path ? (
                       <Image
                         src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
                         alt={actor.name}
-                        width={200}
-                        height={200}
-                        className="rounded-full w-24 h-24 object-cover mx-auto mb-2 transition-colors"
+                        width={128}
+                        height={128}
+                        className="rounded-lg object-cover mx-auto mb-2 transition-colors"
                       />
                     ) : (
-                      <div className="w-24 h-24 rounded-full bg-gray-700 flex items-center justify-center text-gray-400 mx-auto mb-2 text-xs">
+                      <div className="rounded-lg bg-gray-700 flex items-center justify-center text-gray-400 mx-auto mb-2 text-xs">
                         No Photo
                       </div>
                     )}
@@ -165,8 +168,8 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
                       {actor.character}
                     </p>
                   </div>
-                )
-              )}
+                ))}
+              </div>
             </div>
           </div>
         )}

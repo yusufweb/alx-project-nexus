@@ -40,7 +40,7 @@ const Header: React.FC = () => {
             </h1>
           </Link>
         </div>
-        <div className="lg:w-[70%] md:w-[70%] sm:w-[70%] w-[100%]">
+        <div className="lg:w-[65%] md:w-[70%] sm:w-[80%] w-[100%]">
           <form onSubmit={handleSubmit}>
             <div className="relative">
               <input
@@ -88,9 +88,12 @@ const Header: React.FC = () => {
             </div>
           </form>
         </div>
-        <div className="hidden lg:block md:block sm:block">
+        <div className="hidden sm:hidden lg:flex md:flex justify-between items-center xl:w-[10%] lg:w-[12%] md:w-[15%] sm:w-[20%] ">
           <Link href="/favourite">
-            <p className="text-[16px] font-semibold">Favorite</p>
+            <p className="text-[14px] font-semibold">Favorites</p>
+          </Link>
+           <Link href="/genre">
+            <p className="text-[14px] font-semibold">Genres</p>
           </Link>
         </div>
       </div>

@@ -35,11 +35,11 @@ const HeroSection: React.FC = () => {
             better answer. Whether you are solo, with friends, or on date night,
             we help you pick the right movie every time.
           </p>
-          <div className="flex items-center flex-col lg:flex-row md:flex-row lg:space-x-4 md:space-x-4 space-y-5 lg:space-y-0 md:space-y-0">
-            <Button title="Explore" className="w-full lg:w-auto md:w-auto" />
+          <div className="flex items-center flex-row lg:flex-row md:flex-row lg:space-x-4 md:space-x-4 space-x-4">
+            <Button title="Explore Genre" className="w-auto lg:w-auto md:w-auto" onClick={() => router.push("/genre")}/>
             <Button
               title="My Favorite"
-              className="w-full lg:w-auto md:w-auto"
+              className="w-auto lg:w-auto md:w-auto"
               onClick={() => router.push("/favourite")}
             />
           </div>
