@@ -36,10 +36,10 @@ const HeroSection: React.FC = () => {
             we help you pick the right movie every time.
           </p>
           <div className="flex items-center flex-row lg:flex-row md:flex-row lg:space-x-4 md:space-x-4 space-x-4">
-            <Button title="Explore Genre" className="w-auto lg:w-auto md:w-auto" onClick={() => router.push("/genre")}/>
+            <Button title="Explore Genre" className="w-auto lg:w-auto md:w-auto text-sm" onClick={() => router.push("/genre")}/>
             <Button
               title="My Favorite"
-              className="w-auto lg:w-auto md:w-auto"
+              className="w-auto lg:w-auto md:w-auto text-sm"
               onClick={() => router.push("/favourite")}
             />
           </div>
