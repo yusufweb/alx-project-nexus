@@ -27,7 +27,7 @@ const Genre: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen pt-25 px-8">
-      <h1 className="text-3xl font-bold mb-4 text-gray-200">Browse by Genre</h1>
+      <h1 className="text-2xl lg:text-3xl md:text-3xl font-bold mb-4 text-gray-200">Browse by Genre</h1>
       <div className="text-md text-gray-300 grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-4 pt-4">
         {data?.genres.map((genre) => (
           <div
