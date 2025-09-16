@@ -46,7 +46,7 @@ const Header: React.FC = () => {
               <input
                 type="text"
                 placeholder="Search for movies, TV shows..."
-                className="w-full p-4 pl-12 rounded-full bg-[#020c36] bg-opacity-90 text-gray-900 focus:outline-none focus:ring-0 focus:text-cyan-300 transition-all duration-300 placeholder-white sm:text-lg lg:text-lg md:text-lg placeholder:text-[14px]"
+                className="w-full p-4 pl-12 rounded-full bg-[#010720] bg-opacity-90 text-gray-900 focus:outline-none focus:ring-0 focus:text-cyan-300 transition-all duration-300 placeholder-white sm:text-lg lg:text-lg md:text-lg placeholder:text-[14px]"
                 value={searchTerm}
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
