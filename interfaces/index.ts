@@ -22,6 +22,12 @@ export interface HomePageProps {
   error?: string; // Optional error message to display
 }
 
+export interface GenrePageProps {
+    id: string;
+    movie: Movie[];
+    error?: string;
+}
+
 export interface ButtonProps {
   title?: string | any,
   className?: string,

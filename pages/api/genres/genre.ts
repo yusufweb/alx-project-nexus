@@ -41,7 +41,7 @@ export default async function handler(
     const data: GenreProps = await response.json();
     res.status(200).json(data); 
   } catch (error) {
-    console.error("Error in /api/movies/popular:", error);
+    console.error("Error in /api/genre:", error);
     res
       .status(500)
       .json({
