@@ -7,6 +7,8 @@ export default async function handler(
     PopularMoviesResponse | { message: string; details?: string }
   >
 ) {
+
+  const {page = 1} = req.query;
   // Ensure only GET Method are allowed for this endpoint
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Only Get Nethod is allowed" });
@@ -22,7 +24,7 @@ export default async function handler(
       .json({ message: "Server configuration error: TMDB API key missing." });
   }
 
-  const TMDB_API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=1`;
+  const TMDB_API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&language=en-US&page=${page}`;
 
   try {
     const response = await fetch(TMDB_API_URL);

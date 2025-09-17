@@ -32,7 +32,7 @@ const GenrePage: React.FC<GenrePageProps> = ({ id, movie, error }) => {
           </p>
         )}
         <div className="w-full relative z-10 mb-8 ">
-          <h1 className="text-2xl lg:text-3xl md:text-3xl font-bold mb-4 text-gray-200">{Genre.name}</h1>
+          <h1 className="text-2xl lg:text-3xl md:text-3xl font-bold mb-4 text-gray-200">Genre</h1>
         </div>
         <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-5">
           {movie.map((movie) => (

@@ -7,6 +7,8 @@ export interface PopularMoviesResponse {
     release_date: string;
     vote_average: number;
   }[];
+  total_pages: number;
+  total_results: number;
 }
 
 export interface Movie {
@@ -18,6 +20,7 @@ export interface Movie {
 }
 
 export interface HomePageProps {
+  totalPages: number;
   movies: Movie[];
   error?: string; // Optional error message to display
 }
@@ -33,6 +36,7 @@ export interface ButtonProps {
   className?: string,
   onClick?: (e: React.MouseEvent) => void
   children?: React.ReactNode;
+  disabled?: boolean;
 }
 
 export interface SearchMovieResult {
