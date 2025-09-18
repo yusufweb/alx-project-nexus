@@ -87,7 +87,7 @@ const Home: React.FC<HomePageProps> = ({ totalPages, movies, error }) => {
             disabled={loading}
             className="mt-8 px-6 py-2 bg-cyan-500 text-white rounded-full font-semibold hover:bg-cyan-600 transition-colors duration-300 text-lg shadow-sm mx-auto block cursor-pointer"
           >
-            {loading ? <FontAwesomeIcon icon={faSpinner} spin size="2x" /> : "Load more movies"}
+            {loading ? <FontAwesomeIcon icon={faSpinner} spin size="2x" /> : <p className="text-sm">More movies</p>}
           </Button>
         )}
       </div>
