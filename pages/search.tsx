@@ -39,7 +39,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
             <p><span>Go back to <Link href="/" className="bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent">Home</Link></span></p>
           </div>
         ) : (
-          <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5">
+          <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-5">
             {results.map((movie) => (
                 <div key={movie.id}>
                   <MovieCard
