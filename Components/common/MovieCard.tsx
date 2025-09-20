@@ -4,8 +4,13 @@ import Image from "next/image";
 import Button from "./Button";
 import { useRouter } from "next/router";
 import { useFavorites } from "@/hooks/useFavourites";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
 
 const MovieCard: React.FC<Movie> = ({
   id,
@@ -53,13 +58,20 @@ const MovieCard: React.FC<Movie> = ({
         )}
 
         {/* Hover button placed inside image container */}
-        <div className="absolute bottom-3 right-3">
-           <Button
+        <div className="absolute bottom-3 right-3 bg-white rounded-full w-9 h-9 flex items-center justify-center opacity-80">
+          <Button
             title={
               isCurrentlyFavorite ? (
-                <FontAwesomeIcon icon={faHeart} className="text-red-500 text-2xl"/>
+                <FontAwesomeIcon
+                  icon={faHeartSolid}
+                  className="text-cyan-500 text-[18px]"
+                />
               ) : (
-                 <FontAwesomeIcon icon={faHeart} className="text-white text-2xl"/>
+                
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  className="text-black text-[18px]"
+                />
               )
             }
             onClick={handleSaveClick}
@@ -84,4 +96,4 @@ const MovieCard: React.FC<Movie> = ({
   );
 };
 
-export default MovieCard; 
+export default MovieCard;
