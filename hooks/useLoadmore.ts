@@ -30,7 +30,7 @@ export function useLoadMore<T>(
     initialData.length > 0 && initialTotalPages > 1
   );
 
-  // --- CRITICAL FIX: Reset state when new search results are provided ---
+  // Effect to reset state when initialData or initialTotalPages change
   useEffect(() => {
     // This runs whenever the component receives new initial data (i.e., a new search query runs)
     // The previous state is discarded, and the hook is re-initialized with the new props.
