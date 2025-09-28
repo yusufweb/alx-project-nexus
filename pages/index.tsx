@@ -2,37 +2,49 @@ import { GetStaticProps } from "next";
 import { HomePageProps, Movie, PopularMoviesResponse } from "@/interfaces";
 import Hero from "@/Components/common/Hero";
 import MovieCard from "@/Components/common/MovieCard";
-import { useState } from "react";
 import Button from "@/Components/common/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
+import { useLoadMore } from "@/hooks/useLoadmore";
+
+const fetchMovies = async (page: number): Promise<PopularMoviesResponse> => {
+  const res = await fetch(`/api/movies/popular?page=${page}`);
+  return await res.json();
+};
 
 const Home: React.FC<HomePageProps> = ({ totalPages, movies, error }) => {
-  const [movieList, setMovieList] = useState<Movie[]>(movies || []);
-  const [pageCount, setPageCount] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [hasMore, setHasMore] = useState<boolean>(
-    (movies?.length ?? 0) > 0 && (totalPages ?? 1) > 1
-  );
+  const {
+    items: movieList,
+    loading,
+    hasMore,
+    loadMore,
+  } = useLoadMore<Movie>(fetchMovies, movies, totalPages);
 
-  const loadMore = async () => {
-    if (loading || !hasMore) return;
+  // const [movieList, setMovieList] = useState<Movie[]>(movies || []);
+  // const [pageCount, setPageCount] = useState<number>(1);
+  // const [loading, setLoading] = useState<boolean>(false);
+  // const [hasMore, setHasMore] = useState<boolean>(
+  //   (movies?.length ?? 0) > 0 && (totalPages ?? 1) > 1
+  // );
 
-    setLoading(true);
-    try {
-      const nextPage = pageCount + 1;
-      const res = await fetch(`/api/movies/popular?page=${nextPage}`);
-      const data: PopularMoviesResponse = await res.json();
+  // const loadMore = async () => {
+  //   if (loading || !hasMore) return;
 
-      setMovieList((prev) => [...prev, ...data.results]);
-      setPageCount(nextPage);
-      setHasMore(nextPage < data.total_pages);
-    } catch (err) {
-      console.error("Error loading more movies:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //   setLoading(true);
+  //   try {
+  //     const nextPage = pageCount + 1;
+  //     const res = await fetch(`/api/movies/popular?page=${nextPage}`);
+  //     const data: PopularMoviesResponse = await res.json();
+
+  //     setMovieList((prev) => [...prev, ...data.results]);
+  //     setPageCount(nextPage);
+  //     setHasMore(nextPage < data.total_pages);
+  //   } catch (err) {
+  //     console.error("Error loading more movies:", err);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   if (error) {
     return (
@@ -85,9 +97,13 @@ const Home: React.FC<HomePageProps> = ({ totalPages, movies, error }) => {
           <Button
             onClick={loadMore}
             disabled={loading}
-            className="mt-8 px-6 py-2 bg-cyan-500 text-white rounded-full font-semibold hover:bg-cyan-600 transition-colors duration-300 text-lg shadow-sm mx-auto block cursor-pointer"
+            className="mt-8 px-6 py-2 bg-gray-900 text-white rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 text-lg shadow-sm mx-auto block cursor-pointer"
           >
-            {loading ? <FontAwesomeIcon icon={faSpinner} spin size="2x" /> : <p className="text-sm">More movies</p>}
+            {loading ? (
+              <FontAwesomeIcon icon={faSpinner} spin />
+            ) : (
+              <p className="text-sm">More movies</p>
+            )}
           </Button>
         )}
       </div>

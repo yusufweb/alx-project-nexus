@@ -7,11 +7,14 @@ export default async function handler(
     SearchApiResponse | { message: string; details?: string }
   >
 ) {
+
+  
   // Ensure only GET Method are allowed for this endpoint
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Only Get Nethod is allowed" });
   }
-
+  // Extract query parameters
+  const {page = 1} = req.query;
   const {query} = req.query
 
   if (!query || typeof query !== 'string' || query.trim() === '') {
@@ -31,7 +34,7 @@ export default async function handler(
   // Encode the search query to handle spaces and special characters
   const encodedQuery = encodeURIComponent(query.trim());
 
-  const TMDB_API_URL = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodedQuery}&language=en-US&page=1`;
+  const TMDB_API_URL = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodedQuery}&language=en-US&page=${page}&include_adult=false`;
 
   try {
     const response = await fetch(TMDB_API_URL);

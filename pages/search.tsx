@@ -3,8 +3,30 @@ import { SearchPageProps, SearchMovieResult } from "@/interfaces";
 import { GetServerSideProps } from "next";
 import MovieCard from "@/Components/common/MovieCard";
 import Link from "next/link";
+import { useLoadMore } from "@/hooks/useLoadmore";
+import Button from "@/Components/common/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
+import { PaginatedResponse } from "@/interfaces";  
 
-const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
+const fetchMovies = (query: string) => {
+  return async (page: number): Promise<PaginatedResponse<SearchMovieResult>> => {
+    const res = await fetch(`/api/movies/search?page=${page}&query=${encodeURIComponent(query)}`);
+    if (!res.ok) {
+      throw new Error("Failed to load movies.");
+    }
+    return res.json();
+  };
+};
+
+const SearchPage: React.FC<SearchPageProps> = ({ results, totalPages, query, error }) => {
+
+    const {
+      items: movieList,
+      loading,
+      hasMore,
+      loadMore,
+    } = useLoadMore<SearchMovieResult>(fetchMovies(query), results, totalPages);
   
   if (error) {
     return (
@@ -25,7 +47,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
         <h1 className="text-[18px] lg:text-2xl sm:text-2xl md:text-2xl font-bold mb-8 text-center text-gray-100 mt-6">
           Search Results for &quot;{query}&quot;
         </h1>
-        {results.length === 0 ? (
+        {movieList.length === 0 ? (
           <div className="flex flex-col justify-center items-center h-[100vh] bg-[#010822]">
             <Image
               src="/not-found-4064375-3363936.png"
@@ -40,7 +62,7 @@ const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
           </div>
         ) : (
           <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-5">
-            {results.map((movie) => (
+            {movieList.map((movie) => (
                 <div key={movie.id}>
                   <MovieCard
                     title={movie.title}
@@ -52,6 +74,16 @@ const SearchPage: React.FC<SearchPageProps> = ({ results, query, error }) => {
                 </div>
             ))}
           </div>
+        )}
+
+         {hasMore && (
+          <Button
+            onClick={loadMore}
+            disabled={loading}
+            className="mt-8 px-6 py-2 bg-gray-900 text-white rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 text-lg shadow-sm mx-auto block cursor-pointer"
+          >
+            {loading ? <FontAwesomeIcon icon={faSpinner} spin /> : <p className="text-sm">More movies</p>}
+          </Button>
         )}
       </div>
     </>
@@ -74,6 +106,7 @@ export const getServerSideProps: GetServerSideProps<SearchPageProps> = async (
         results: [],
         query: (query || "") as string,
         error: "Invalid search query.",
+        totalPages: 1
       },
     };
   }
@@ -82,7 +115,7 @@ export const getServerSideProps: GetServerSideProps<SearchPageProps> = async (
 
   try {
     // 2. Call internal search API route
-    const res = await fetch(`${API_ENDPOINT}?query=${encodedQuery}`);
+    const res = await fetch(`${API_ENDPOINT}?page=1&query=${encodedQuery}`);
 
     if (!res.ok) {
       const errorDetails = await res.json();
@@ -100,6 +133,7 @@ export const getServerSideProps: GetServerSideProps<SearchPageProps> = async (
       props: {
         results,
         query,
+        totalPages: data.total_pages
       },
     };
   } catch (error) {
@@ -108,6 +142,7 @@ export const getServerSideProps: GetServerSideProps<SearchPageProps> = async (
       props: {
         results: [],
         query,
+        totalPages: 1,
         error: `Failed to load search results: ${
           (error as Error).message || "Unknown error"
         }`,

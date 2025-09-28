@@ -2,9 +2,37 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import { Movie, GenrePageProps } from "@/interfaces";
 import MovieCard from "@/Components/common/MovieCard";
-import Genre from "../genre";
+import { useLoadMore } from "@/hooks/useLoadmore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons/faSpinner";
+import Button from "@/Components/common/Button";
+import { PaginatedResponse } from "@/interfaces";
 
-const GenrePage: React.FC<GenrePageProps> = ({ id, movie, error }) => {
+const fetchMovies = (id: string) => {
+  return async (page: number): Promise<PaginatedResponse<Movie>> => {
+    const res = await fetch(
+      `/api/genres/${encodeURIComponent(id)}?page=${page}`
+    );
+    if (!res.ok) {
+      throw new Error("Failed to load movies.");
+    }
+    return res.json();
+  };
+};
+
+const GenrePage: React.FC<GenrePageProps> = ({
+  id,
+  movie,
+  error,
+  totalPages,
+}) => {
+  const {
+    items: movieList,
+    loading,
+    hasMore,
+    loadMore,
+  } = useLoadMore<Movie>(fetchMovies(id), movie, totalPages);
+
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white p-4">
@@ -25,29 +53,45 @@ const GenrePage: React.FC<GenrePageProps> = ({ id, movie, error }) => {
   }
 
   return (
-     <div className="min-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 mt-25">
-        {movie.length === 0 && !error && (
-          <p className="text-center text-gray-400 text-lg">
-            No movies found at the moment. Please try again later.
-          </p>
-        )}
-        <div className="w-full relative z-10 mb-8 ">
-          <h1 className="text-2xl lg:text-3xl md:text-3xl font-bold mb-4 text-gray-200">Genre</h1>
-        </div>
-        <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-5">
-          {movie.map((movie) => (
-            <div key={movie.id}>
-              <MovieCard
-                title={movie.title}
-                release_date={movie.release_date}
-                vote_average={movie.vote_average}
-                id={movie.id}
-                poster_path={movie.poster_path}
-              />
-            </div>
-          ))}
-        </div>
+    <div className="min-h-screen px-4 lg:px-8 md:px-8 sm:px-8 py-4 mt-25">
+      {movieList.length === 0 && !error && (
+        <p className="text-center text-gray-400 text-lg">
+          No movies found at the moment. Please try again later.
+        </p>
+      )}
+      <div className="w-full relative z-10 mb-8 ">
+        <h1 className="text-2xl lg:text-3xl md:text-3xl font-bold mb-4 text-gray-200">
+          Genre
+        </h1>
       </div>
+      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-5">
+        {movieList.map((movie) => (
+          <div key={movie.id}>
+            <MovieCard
+              title={movie.title}
+              release_date={movie.release_date}
+              vote_average={movie.vote_average}
+              id={movie.id}
+              poster_path={movie.poster_path}
+            />
+          </div>
+        ))}
+      </div>
+
+      {hasMore && (
+        <Button
+          onClick={loadMore}
+          disabled={loading}
+          className="mt-8 px-6 py-2 bg-gray-900 text-white rounded-full font-semibold hover:bg-gray-800 transition-colors duration-300 text-lg shadow-sm mx-auto block cursor-pointer"
+        >
+          {loading ? (
+            <FontAwesomeIcon icon={faSpinner} spin />
+          ) : (
+            <p className="text-sm">More movies</p>
+          )}
+        </Button>
+      )}
+    </div>
   );
 };
 
@@ -56,7 +100,7 @@ export const getServerSideProps: GetServerSideProps<GenrePageProps> = async (
 ) => {
   const { id } = context.params || {};
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000/";
-  const API_ENDPOINT = `${BASE_URL}/api/genres/${id}`;
+  const API_ENDPOINT = `${BASE_URL}/api/genres/${id}?page=1`;
 
   // Basic validation for the ID from the URL parameter
   if (!id || Array.isArray(id)) {
@@ -65,6 +109,7 @@ export const getServerSideProps: GetServerSideProps<GenrePageProps> = async (
       props: {
         id: typeof id === "string" ? id : "",
         movie: [],
+        totalPages: 0,
         error: "Invalid genre ID in URL.",
       },
     };
@@ -87,6 +132,7 @@ export const getServerSideProps: GetServerSideProps<GenrePageProps> = async (
       props: {
         id,
         movie,
+        totalPages: data.total_pages || 1,
       },
     };
   } catch (error) {
@@ -95,6 +141,7 @@ export const getServerSideProps: GetServerSideProps<GenrePageProps> = async (
       props: {
         id: typeof id === "string" ? id : "",
         movie: [],
+        totalPages: 0,
         error: `Failed to load movie details: ${
           (error as Error).message || "Unknown error"
         }`,

@@ -10,6 +10,7 @@ export default async function handler(
   }
 
   const { id } = req.query;
+  const {page = 1 } = req.query;
 
   if (!id || typeof id !== "string") {
     return res
@@ -26,7 +27,7 @@ export default async function handler(
       .json({ message: "Server configuration error: TMDB API key missing." });
   }
 
-  const TMDB_DETAIL_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${id}&page=1`;
+  const TMDB_DETAIL_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&with_genres=${id}&page=${page}`;
 
   try {
     const response = await fetch(TMDB_DETAIL_URL);
@@ -34,7 +35,7 @@ export default async function handler(
     // check if the response from TMDB is successful
     if (!response.ok) {
       if (response.status === 404) {
-        return res.status(404).json({ message: "Movie Not found." });
+        return res.status(404).json({ message: "Genre Not found." });
       }
       const errorData = await response.json();
       console.error(
@@ -43,7 +44,7 @@ export default async function handler(
         }`
       );
       return res.status(response.status).json({
-        message: `Failed to fetch movie details from TMDB: ${response.statusText}`,
+        message: `Failed to fetch genres from TMDB: ${response.statusText}`,
         details: errorData,
       });
     }

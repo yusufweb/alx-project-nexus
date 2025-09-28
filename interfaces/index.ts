@@ -25,12 +25,6 @@ export interface HomePageProps {
   error?: string; // Optional error message to display
 }
 
-export interface GenrePageProps {
-    id: string;
-    movie: Movie[];
-    error?: string;
-}
-
 export interface ButtonProps {
   title?: string | any,
   className?: string,
@@ -49,11 +43,13 @@ export interface SearchMovieResult {
 }
 
 export interface SearchApiResponse {
+  totalPages: number;
   page: number;
   results: SearchMovieResult[];
 }
 
 export interface SearchPageProps {
+  totalPages: number;
   results: SearchMovieResult[];
   query: string;
   error?: string;
@@ -98,3 +94,23 @@ export interface GenresPageProps {
   genres: GenreProps[];
   error?: string;
 }
+
+export interface GenrePageProps {
+    totalPages: number;
+    id: string;
+    movie: Movie[];
+    error?: string;
+}
+
+export interface PaginatedResponse<T> {
+  results: T[];
+  total_pages: number;
+}
+
+export interface UseLoadMoreState<T> {
+  items: T[];
+  loading: boolean;
+  hasMore: boolean;
+  loadMore: () => void;
+}
+
