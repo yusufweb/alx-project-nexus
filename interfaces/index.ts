@@ -80,6 +80,35 @@ export interface MovieDetail {
   };
 }
 
+export interface Review {
+  author: string;
+  content: string;
+  created_at: string;
+  author_details: {
+    username: string;
+    rating: number | null;
+    avatar_path: string | null;
+  };
+}
+
+export interface ReviewResponse {
+  page: number;
+  results: Review[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface MovieDetailWithReviews {
+  movie: MovieDetail;
+  reviews?: Review[];
+  reviewMeta?: {
+    page: number;
+    total_pages: number;
+    total_results: number;
+  };
+  error?: string;
+}
+
 export interface MovieDetailPageProps {
   movie: MovieDetail | null;
   error?: string;

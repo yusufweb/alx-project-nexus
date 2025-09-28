@@ -1,9 +1,9 @@
-import { MovieDetail } from "@/interfaces";
+import { MovieDetail, Review, MovieDetailWithReviews } from "@/interfaces";
 import { NextApiResponse, NextApiRequest } from "next";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<MovieDetail | { message: string; details?: string }>
+  res: NextApiResponse<MovieDetailWithReviews | { message: string; details?: string }>
 ) {
   if (req.method !== "GET") {
     return res.status(405).json({ message: "Method Not Allowed" });
@@ -27,36 +27,47 @@ export default async function handler(
   }
 
   const TMDB_DETAIL_URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=en-US&append_to_response=credits`;
-
+  const TMDB_REVIEWS_URL = `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${TMDB_API_KEY}&language=en-US&page=1`;
+  
   try {
-    const response = await fetch(TMDB_DETAIL_URL);
+    const [movieRes, reviewsRes] = await Promise.all([
+      fetch(TMDB_DETAIL_URL),
+      fetch(TMDB_REVIEWS_URL),
+    ]);
 
-    // check if the response from TMDB is successful
-    if (!response.ok) {
-      if (response.status === 404) {
-        return res.status(404).json({ message: "Movie Not found." });
-      }
-      const errorData = await response.json();
-      console.error(
-        `TMDB Detail API error: ${response.status} - ${
-          errorData.status_message || response.statusText
-        }`
-      );
-      return res.status(response.status).json({
-        message: `Failed to fetch movie details from TMDB: ${response.statusText}`,
+    if (!movieRes.ok) {
+      const errorData = await movieRes.json();
+      return res.status(movieRes.status).json({
+        message: `Failed to fetch movie details: ${movieRes.statusText}`,
         details: errorData,
       });
     }
 
-    const data: MovieDetail = await response.json();
-    res.status(200).json(data);
+    if (!reviewsRes.ok) {
+      const errorData = await reviewsRes.json();
+      return res.status(reviewsRes.status).json({
+        message: `Failed to fetch movie reviews: ${reviewsRes.statusText}`,
+        details: errorData,
+      });
+    }
+
+    const movie: MovieDetail = await movieRes.json();
+    const reviewsData = await reviewsRes.json();
+
+    return res.status(200).json({
+      movie,
+      reviews: reviewsData.results as Review[],
+      reviewMeta: {
+        page: reviewsData.page,
+        total_pages: reviewsData.total_pages,
+        total_results: reviewsData.total_results,
+      },
+    });
   } catch (error) {
     console.error("Error in /api/movies/[id]:", error);
-    res
-      .status(500)
-      .json({
-        message: "Internal Server Error",
-        details: (error as Error).message,
-      });
+    return res.status(500).json({
+      message: "Internal Server Error",
+      details: (error as Error).message,
+    });
   }
 }

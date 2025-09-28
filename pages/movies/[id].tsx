@@ -1,9 +1,14 @@
 import { GetServerSideProps } from "next";
-import { MovieDetailPageProps, MovieDetail } from "@/interfaces";
+import { MovieDetailPageProps, MovieDetailWithReviews } from "@/interfaces";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
-const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
+const MovieDetails: React.FC<MovieDetailWithReviews> = ({
+  movie,
+  reviews = [],
+  reviewMeta,
+  error,
+}) => {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -14,14 +19,11 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
     );
   }
 
-  //   404 ERROR
   if (error || !movie) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-6 text-center">
         <h1 className="text-4xl font-bold text-red-500 mb-4">Error</h1>
-        <p className="text-xl text-gray-300 mb-4">
-          {error || "Movie not found."}
-        </p>
+        <p className="text-xl text-gray-300 mb-4">{error || "Movie not found."}</p>
       </div>
     );
   }
@@ -121,9 +123,7 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
             </div>
 
             <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-2 text-gray-200">
-                Genres
-              </h2>
+              <h2 className="text-2xl font-semibold mb-2 text-gray-200">Genres</h2>
               <p className="text-lg text-gray-300">{genresList || "N/A"}</p>
             </div>
           </div>
@@ -132,16 +132,11 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
         {/* Cast Section */}
         {movie.credits && movie.credits.cast.length > 0 && (
           <div className="mt-12">
-            <h2 className="text-2xl font-bold mb-6 text-gray-300">
-              Top Cast
-            </h2>
+            <h2 className="text-2xl font-bold mb-6 text-gray-300">Top Cast</h2>
             <div className="overflow-x-auto pb-4 scrollbar-hide">
               <div className="flex space-x-8 min-w-max">
                 {movie.credits.cast.slice(0, 12).map((actor) => (
-                  <div
-                    key={actor.id}
-                    className="text-center w-35 flex-shrink-0"
-                  >
+                  <div key={actor.id} className="text-center w-35 flex-shrink-0">
                     {actor.profile_path ? (
                       <Image
                         src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
@@ -155,16 +150,10 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
                         No Photo
                       </div>
                     )}
-                    <p
-                      className="font-semibold text-white truncate"
-                      title={actor.name}
-                    >
+                    <p className="font-semibold text-white truncate" title={actor.name}>
                       {actor.name}
                     </p>
-                    <p
-                      className="text-sm text-gray-400 truncate"
-                      title={actor.character}
-                    >
+                    <p className="text-sm text-gray-400 truncate" title={actor.character}>
                       {actor.character}
                     </p>
                   </div>
@@ -173,30 +162,56 @@ const MovieDetails: React.FC<MovieDetailPageProps> = ({ movie, error }) => {
             </div>
           </div>
         )}
+
+        {/* Reviews Section */}
+        {reviews.length > 0 && (
+          <div className="mt-12 container mx-auto px-6 max-w-4xl">
+            <h2 className="text-2xl font-bold mb-6 text-gray-300">
+              Reviews ({reviewMeta?.total_results || reviews.length})
+            </h2>
+            <div className="space-y-6">
+              {reviews.map((review) => (
+                <div
+                  key={review.author + review.created_at}
+                  className="bg-gray-900 rounded-lg p-4 shadow-md"
+                >
+                  <div className="flex items-center mb-2">
+                    <p className="font-semibold text-cyan-400 mr-4">{review.author}</p>
+                    {review.author_details.rating !== null && (
+                      <span className="text-sm bg-cyan-500 text-black px-2 rounded">
+                        ⭐ {review.author_details.rating}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-gray-300 whitespace-pre-line">{review.content}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-// getServerSideProps is used to fetch the movie data dynamically on each request
-export const getServerSideProps: GetServerSideProps<
-  MovieDetailPageProps
-> = async (context) => {
+// getServerSideProps to fetch the movie + reviews data from combined API
+export const getServerSideProps: GetServerSideProps<MovieDetailPageProps> = async (
+  context
+) => {
   const { id } = context.params || {};
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000/";
   const API_ENDPOINT = `${BASE_URL}/api/movies/${id}`;
 
-  // Basic validation for the ID from the URL parameter
   if (!id || Array.isArray(id)) {
     return {
       props: { movie: null, error: "Invalid movie ID in URL." },
-      notFound: true, // Return a 404 page if ID is invalid
+      notFound: true,
     };
   }
 
   try {
     const res = await fetch(API_ENDPOINT);
-    // If the API route returns a 404, return a 404 page here too
+
     if (res.status === 404) {
       return {
         props: { movie: null, error: "Movie not found." },
@@ -207,16 +222,18 @@ export const getServerSideProps: GetServerSideProps<
     if (!res.ok) {
       const errorDetails = await res.json();
       throw new Error(
-        errorDetails.message ||
-          `Failed to fetch movie details, status: ${res.status}`
+        errorDetails.message || `Failed to fetch movie details, status: ${res.status}`
       );
     }
 
-    const movie: MovieDetail = await res.json();
+    // data contains { movie, reviews, reviewMeta }
+    const data = await res.json();
 
     return {
       props: {
-        movie,
+        movie: data.movie,
+        reviews: data.reviews,
+        reviewMeta: data.reviewMeta,
       },
     };
   } catch (error) {
@@ -224,9 +241,7 @@ export const getServerSideProps: GetServerSideProps<
     return {
       props: {
         movie: null,
-        error: `Failed to load movie details: ${
-          (error as Error).message || "Unknown error"
-        }`,
+        error: `Failed to load movie details: ${(error as Error).message || "Unknown error"}`,
       },
     };
   }
